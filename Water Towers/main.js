@@ -1,6 +1,6 @@
 $(document).ready(
   function(){
-    $("figure").on("click",function(){
+    $("li figure").on("click",function(){
         addMyClass(this);
         findMyImage(this);
     }
@@ -22,9 +22,16 @@ function findMyImage(item){
   var regExPatt =/[0-9]+/;
   var regExItem = new RegExp(regExPatt);
   var imageNum = regExItem.exec(imageSrc);
-  console.log(imageNum[0]);
   var myCaption = myKids[1];
-  var imageUrl = "images/watertowers-";
-  $("div#image img").attr("src",imageUrl + imageNum[0] +".jpg" );
+  var imageUrl = "images/watertowers-" + imageNum[0] +".jpg";
+
+  $("div#image figure").fadeOut(1000, function(){
+
+    $("div#image img").attr("src",imageUrl);
+    $("div#image figcaption").text( $(myCaption).text() );
+  });
+
+  $("div#image figure").fadeIn("slow");
+
 
 };
